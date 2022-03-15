@@ -21,9 +21,6 @@ class PostController:
         elif request.method == 'POST':
             payload = json.loads(request.body)
 
-        #   post = Post(**payload)
-        #   post.save()
-
             post = Post(
                 title = payload['title'],
                 content = payload['content']
