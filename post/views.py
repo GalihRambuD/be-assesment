@@ -1,7 +1,8 @@
 import json
 from turtle import title
+from urllib import response
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 
@@ -23,7 +24,8 @@ class PostController:
 
             post = Post(
                 title = payload['title'],
-                content = payload['content']
+                content = payload['content'],
+                active = payload['active']
             )
             post.save()
 
@@ -56,3 +58,15 @@ class PostController:
             post.delete()
 
         return HttpResponse(json.dumps(response, default=str), content_type='text/json')
+    
+    def toggle(request, post_id):
+        post = Post.objects.get(id=post_id)
+        post.active = not post.active
+        post.save()
+        
+        return JsonResponse({
+            "id" : post.id,
+            "title" : post.title,
+            "content" : post.content,
+            "active" : post.active
+        })

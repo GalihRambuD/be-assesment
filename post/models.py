@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 # Create your models here.
@@ -8,6 +9,7 @@ class Post(models.Model):
     published_at = models.DateTimeField(blank=True, auto_now=True)
     created_at = models.DateTimeField(blank=True, auto_now_add=True)
     updated_at = models.DateTimeField(blank=True, auto_now=True)
+    active = models.BooleanField(default=True)
 
     class Meta:
         managed = True

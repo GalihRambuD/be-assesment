@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/', PostController.index),
     path('posts/<int:post_id>', PostController.detail),
+    path('posts/<int:post_id>/toggle-active', PostController.toggle),
 ]
